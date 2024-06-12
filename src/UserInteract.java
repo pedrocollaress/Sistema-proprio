@@ -1,7 +1,13 @@
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class UserInteract {
 
+    final String ESCOLHE_EVENTO = "Escolha o evento:" + "\n";
+    final String VALIDA_EVENTO = "Cadastre um evento primeiro";
+    final String ESCOLHE_USUARIO = "Escolha o usuario: " + "\n";
+    final String VALIDA_USUARIO = "Cadastre um usuario primeiro";
     final String PEDIR_NOME = "Digite o nome:";
     final String PEDIR_IDADE = "Digite a sua idade:";
     final String PEDIR_LOCAL = "Digite o local do evento:";
@@ -59,9 +65,35 @@ public class UserInteract {
         return leitor.nextInt();
     }
 
+    public void validaUsuario(List<Usuario> lista){
+        if (lista.isEmpty()) System.out.println(VALIDA_USUARIO);
+    }
 
+    public void mostrarUsuarios(List<Usuario> lista){
+        System.out.println(ESCOLHE_USUARIO);
 
+        Consumer<Usuario> printaComIndex =
+                usuario -> {
+                    System.out.println((lista.indexOf(usuario)+1) + " - " + usuario);
+                };
+        lista.stream()
+                .forEach(printaComIndex);
+    }
 
+    public void validaEvento(List<Evento> lista){
+        if (lista.isEmpty()) System.out.println(VALIDA_EVENTO);
+    }
+
+    public void mostrarEventos(List<Evento> lista){
+        System.out.println(ESCOLHE_EVENTO);
+
+        Consumer<Evento> printaComIndex =
+                evento -> {
+                    System.out.println((lista.indexOf(evento)+1) + " - " + evento);
+                };
+        lista.stream()
+                .forEach(printaComIndex);
+    }
 }
 
 
