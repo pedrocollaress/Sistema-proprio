@@ -4,6 +4,10 @@ import java.util.function.Consumer;
 
 public class UserInteract {
 
+
+    final String ACABOU_INGRESSOS = "nao foi possivel adquirir pois os ingresos estao esgotados";
+    final String CASA_CAIU = "não foi possivel comprar ingresso pq tu e menor de idade";
+    final String COMPRA_COM_SUCESSO = "Compra executada com sucesso" + "\n";
     final String ESCOLHE_EVENTO = "Escolha o evento:" + "\n";
     final String VALIDA_EVENTO = "Cadastre um evento primeiro";
     final String ESCOLHE_USUARIO = "Escolha o usuario: " + "\n";
@@ -24,6 +28,8 @@ public class UserInteract {
                 6 - Quais usuarios compraram ingresso
                 0 - Sair
                  ==========================""";
+
+
 
 
     public int mostrarMenu(Scanner leitor){
@@ -65,8 +71,12 @@ public class UserInteract {
         return leitor.nextInt();
     }
 
-    public void validaUsuario(List<Usuario> lista){
-        if (lista.isEmpty()) System.out.println(VALIDA_USUARIO);
+    public boolean validaUsuario(List<Usuario> lista){
+        if (lista.isEmpty()) {
+            System.out.println(VALIDA_USUARIO);
+            return false;
+        };
+        return true;
     }
 
     public void mostrarUsuarios(List<Usuario> lista){
@@ -74,14 +84,17 @@ public class UserInteract {
 
         Consumer<Usuario> printaComIndex =
                 usuario -> {
-                    System.out.println((lista.indexOf(usuario)+1) + " - " + usuario);
+                    System.out.println((lista.indexOf(usuario)+1) + " - "+ "\n" + usuario);
                 };
-        lista.stream()
-                .forEach(printaComIndex);
+        lista.forEach(printaComIndex);
     }
 
-    public void validaEvento(List<Evento> lista){
-        if (lista.isEmpty()) System.out.println(VALIDA_EVENTO);
+    public boolean validaEvento(List<Evento> lista){
+        if (lista.isEmpty()) {
+            System.out.println(VALIDA_EVENTO);
+            return false;
+        };
+        return true;
     }
 
     public void mostrarEventos(List<Evento> lista){
@@ -89,10 +102,23 @@ public class UserInteract {
 
         Consumer<Evento> printaComIndex =
                 evento -> {
-                    System.out.println((lista.indexOf(evento)+1) + " - " + evento);
+                    System.out.println((lista.indexOf(evento)+1) + " - " + "\n" + evento);
                 };
         lista.stream()
                 .forEach(printaComIndex);
+    }
+
+    public void compraExecutadaComSucesso(){
+        System.out.println(COMPRA_COM_SUCESSO);
+    }
+
+    public void casaCaiuVagabundo(){
+        System.out.println(CASA_CAIU);
+    }
+
+
+    public void acabouIngressos(){
+        System.out.println(ACABOU_INGRESSOS);
     }
 }
 

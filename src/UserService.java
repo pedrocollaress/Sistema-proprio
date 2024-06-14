@@ -6,21 +6,25 @@ public class UserService {
 
     UserInteract userInteract = new UserInteract();
 
+    public Usuario compraIngresso(Usuario usuario){
 
-    public void acessarPosicaoDaLista(List<Usuario> lista, int num){
-            Usuario escolhido = lista.get(num);
-            escolhido.ingressos++;
+        usuario.ingressos++;
+        return usuario;
     }
 
-    public void escolherUsuario(List<Usuario> usuarios, Scanner leitor){
+    public Usuario acessarPosicaoDaLista(List<Usuario> lista, int num){
+            return lista.get(num);
+    }
 
-       userInteract.validaUsuario(usuarios);
-       userInteract.mostrarUsuarios(usuarios);
+    public int pegaIndexDoUsuario(List<Usuario> usuarios, Scanner leitor){
+        userInteract.mostrarUsuarios(usuarios);
+        return leitor.nextInt();
+    }
 
-
-        int usuarioEscolhido = leitor.nextInt();
-        acessarPosicaoDaLista(usuarios ,usuarioEscolhido-1);
-
+    public Usuario escolherUsuario(List<Usuario> usuarios, Scanner leitor){
+        if(userInteract.validaUsuario(usuarios))
+            return acessarPosicaoDaLista(usuarios, pegaIndexDoUsuario(usuarios, leitor) - 1);
+        return null;
     }
 
 

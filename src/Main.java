@@ -18,6 +18,7 @@ public class Main {
 
         Scanner leitor = new Scanner(System.in);
 
+
         while(true) {
 
 
@@ -42,17 +43,15 @@ public class Main {
                         .forEach(System.out::println);
 
                 case 5 -> {
-                    userService.escolherUsuario(usuarios, leitor);
-                    eventService.escolherEvento(eventos, leitor);
+                    Usuario usuarioEscolhido = userService.escolherUsuario(usuarios, leitor);
+                    Evento eventoEscolhido = eventService.escolherEvento(eventos,usuarioEscolhido, leitor);
                 }
-
 
                 case 6 ->
                     usuarios.stream()
                             .filter(usuario -> usuario.ingressos >= 1)
                             .map(usuario -> usuario.nome)
                             .forEach(System.out::println);
-
             }
         }
 
